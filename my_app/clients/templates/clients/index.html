@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script>function ejecuta(){
+            fetch("http://127.0.0.1:8000/api/item").then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    console.log(myJson);
+  });
+        }</script>
+        <title></title>
+    </head>
+    <body><h1>clientes</h1>
+        <ul>
+            {% for cliente in clientes %}
+                <li><a href="bio/{{cliente.id}}">{{cliente}}</a></li>
+            {% endfor %}
+        </ul>
+
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+    
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+                </span>
+
+                <div>aqui {{next_page}} {{pages}}</div>
+                {% if next_page < pages %}
+                <div>jaja {{next_page}} {{pages}}</div>
+                {% endif %}
+    
+                {% if next_page <= pages %}
+                    <a href="?page={{next_page}}">next</a>
+                {% endif %}
+            </span>
+        </div>
+
+        <div>
+        {% if is_authenticated %}
+        <form action="/auth/logout" method="post">
+            {% csrf_token %}
+            <input type="submit" value="log out">
+        </form>
+        <button type="submit" onClick=ejecuta()>api</button>
+        {% else %}
+        <div>
+            {% include "../registration/login.html" %}
+        </div>
+        {% endif %}
+        </div>
+        {% comment %}
+        <div>
+            <div>
+                <h2>Agrega usuario</h2>  
+            </div>
+            <div>
+                <form action="{% url 'clients:index' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" placeholder="nombre" name="nombre"/>
+                    <input type="password" placeholder="password" name="password"/>
+                    <input type="submit" value="agrega usuario">
+                    </form>
+            </div>
+        </div>
+        {% endcomment %}
+        
+    </body>
+</html>
+

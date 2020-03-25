@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <script>
+            function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+            function ejecuta(user){    
+                console.log("vinedo user", getCookie('csrftoken'))
+                pass = document.getElementById("password").value;
+                const headers = new Headers({
+                    'Content-Type': 'x-www-form-urlencoded',
+                    'X-CSRFToken': getCookie('csrftoken')
+                });
+                fetch("http://127.0.0.1:8000/clients/", {
+                    method: 'PUT',
+                    headers,
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        user: 'jorge1',
+                        password: pass
+                    })
+                })
+                .then(function(myJson) {
+                    console.log('funciono')
+                    //var url= "http://127.0.0.1:8000/clients/"; 
+                    //window.location = url; 
+                });
+                console.log("viendo pas ", pass);
+            }
+        </script>
+
+    </head>
+    <body>
+        {% if user %}
+        <p>user {{user.username}}</p>
+        <p>change password</p>
+        <p>
+                <input id="password" type="password" placeholder="password" name="password"/>
+                <button onClick=ejecuta({{user.name}})>accept</button>
+        </p>
+        {% endif %}
+        <ul>
+        {% for x in travels %}
+        <li>travel, {{x}}</li>
+        {% endfor %}
+        </ul>
+    </body>
+</html>

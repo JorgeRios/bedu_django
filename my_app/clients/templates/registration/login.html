@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <title></title>
+    </head>
+    <body>
+        <h1>login</h1>
+        <form action="/auth/loging" method="post">
+            {% csrf_token %}
+            <input type="text" placeholder="nombre" name="nombre"/>
+            <input type="password" placeholder="password" name="password"/>
+            <input type="submit" value="log in">
+        </form>
+        
+    </body>
+</html>
