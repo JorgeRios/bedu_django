@@ -17,9 +17,11 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
 from . import views
+from graphene_django.views import GraphQLView
 
 app_name = 'main'
 urlpatterns = [
+    url(r'^graphql$', GraphQLView.as_view(graphiql=True)),
     path('clients/', include('clients.urls')),
     path('', views.Index.as_view(), name='index'),
     #path('accounts/', include('django.contrib.auth.urls')),

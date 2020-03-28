@@ -1,0 +1,55 @@
+
+#query {
+#  travel(mes:"junio") {
+#    id,
+#    mes,
+#    titulo
+#  }
+#  client(id:1){
+#    nombre
+#  }
+#}
+
+
+
+
+
+#{
+#    allClients {
+#        pageInfo {
+#        startCursor
+#       endCursor
+#        hasNextPage
+#        hasPreviousPage
+#        }
+#      edges {
+#        cursor
+#        node {
+#            id
+#          nombre
+#        }
+#        }
+#      
+#    }
+#}
+
+#query{
+#  allClients{
+#    edges{
+#      node{
+#        nombre
+#      }
+#    }
+#  }
+#}
+
+
+#mutation {
+#  updateClient(nombre: "susanaaaaa", id: 8) {
+#    client {
+#      nombre
+#      id
+#    }
+#  }
+#}
+mutation {updateClient(nombre: "susanaaaaa", id: 8) {client {nombre id}}}

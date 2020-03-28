@@ -4,7 +4,7 @@ from django.db import models
 
 class Client(models.Model):
     nombre = models.CharField(max_length=100)
-    edad = models.CharField(max_length=4)
+    edad = models.CharField(max_length=4, blank=False)
 
     def __str__(self):
         return "{} {}".format(self.nombre, self.edad)

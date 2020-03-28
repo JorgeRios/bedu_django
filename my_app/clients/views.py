@@ -17,6 +17,11 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from .serializers import UserSerializer
 
+from graphene_django.forms.mutation import DjangoFormMutation
+from django import forms
+from .forms import ClientForm
+
+
 
 
 class PublisherList(ListView):
@@ -80,8 +85,6 @@ class Index(View):
         Client.objects.filter(pk=client.pk).update(edad=json_val['password'])
         return HttpResponse("usign class viewss")
 
-
-
 #def index(request):
 #    clients = Client.objects.all()
 #    travels = Travel.objects.all()
@@ -118,4 +121,23 @@ class MorningGreetingView(View):
     def get(self, request):
         #return HttpResponse("hey {}".format(self.greeting))
         return render(request, "index.html", {})
-       
+
+
+def get_client(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ClientForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            print(form)
+            nombre = form.cleaned_data['nombre']
+            print("viendo el nombre", nombre)
+            return HttpResponse("bien")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ClientForm()
+
+    return render(request, 'graph_form.html', {'form': form})
+

@@ -17,5 +17,6 @@ urlpatterns = [
     path('other', views.MorningGreetingView.as_view(greeting="quivoles"), name="greet"),
     path('publishers/', views.PublisherList.as_view()),
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('graph-form', views.get_client)
 ]

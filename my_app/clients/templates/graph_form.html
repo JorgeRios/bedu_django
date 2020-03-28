@@ -1,0 +1,8 @@
+<form action="/clients/graph-form" method="post">
+    {% csrf_token %}
+    <label for="nombre">nombre: </label>
+    <input id="nombre" type="text" name="nombre" value="{{ nombre }}">
+    <label for="edad">edad: </label>
+    <input id="edad" type="text" name="edad" value="{{ edad }}">
+    <input type="submit" value="ok">
+</form>
