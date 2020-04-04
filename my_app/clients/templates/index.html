@@ -5,6 +5,7 @@
         <title></title>
     </head>
     <body><h1>HOME</h1>
+        <img src="../../static/f1.png"/>
         {% if is_authenticated %}
         <form action="/auth/logout" method="post">
             {% csrf_token %}

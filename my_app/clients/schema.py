@@ -6,6 +6,10 @@ from graphene_django.forms.mutation import DjangoFormMutation
 from django import forms
 from graphene_django.rest_framework.mutation import SerializerMutation
 from .serializers import ClientSerializer
+import sqlalchemy
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
 
 
 class ClientType(SerializerMutation):
@@ -33,7 +37,21 @@ class Query(object):
                                   mes=graphene.String())
 
     def resolve_all_clients(self, info, **kwargs):
-        return Client.objects.all()
+        uri = 'mysql+pymysql://newuser:user_password@127.0.0.1:3306/test2'
+        engine = create_engine(uri)
+        conn = engine.connect().connection
+        session = sessionmaker(bind=engine)()
+        query = "select * from client_good"
+        val = redis.get(query)
+        if val:
+            return val
+        my_vals = []
+        for x in session.execute(query):
+
+            my_vals.append(dict(id=x.id, nombre=x.nombre))
+            
+        #return Client.objects.all()
+        return my_vals
 
     def resolve_all_travels(self, info, **kwargs):
         return Travel.objects.all()

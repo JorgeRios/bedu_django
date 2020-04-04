@@ -1,0 +1,9 @@
+manejar request limmit en django
+usar redis para cache de datos
+usar con grpahql query por medio de ORM, y por medio sqlalchemy
+reportes de k6 para comparar velocidad de queries (ORM, sqlalchemy)
+bloquear ruta de grahpql en deploy
+
+
+extra
+congiruar nginx para request limmit

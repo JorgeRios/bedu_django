@@ -76,7 +76,7 @@ class Index(View):
         user = User.objects.create(username=nombre, password=password)
         user.save()
         return HttpResponse("usign class viewss")
-    
+
     def put(self, request):
         print("en el put")
         json_val = json.loads(request.body)
